@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Nc1ExIpscanCspCon1.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="HostBegin" Type="System.String" Scope="User">
+      <Value Profile="(Default)">192.168.27.1</Value>
+    </Setting>
+    <Setting Name="HostEnd" Type="System.String" Scope="User">
+      <Value Profile="(Default)">192.168.27.255</Value>
+    </Setting>
+    <Setting Name="Serv" Type="System.String" Scope="User">
+      <Value Profile="(Default)">10100</Value>
+    </Setting>
+    <Setting Name="FindThread" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">100</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
