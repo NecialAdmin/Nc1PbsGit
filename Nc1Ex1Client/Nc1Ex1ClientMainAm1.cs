@@ -33,6 +33,7 @@ namespace Nc1Ex1Client
 			{ qv("Dbg on recv: " + pkrd.getPkt()/* + pkrd.ReadString()*/ ); return true; }
 		}
 
+		public void qv(string s1) { Console.WriteLine(s1); }
 		static void Main(string[] args)
 		{
 			Client ct = new Client();
