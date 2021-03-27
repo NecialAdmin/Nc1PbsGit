@@ -11,6 +11,7 @@ namespace Nc1Ex1Server
 
 		public class Sv : NccpcDll.NccpcNw1Sv
 		{
+			public List<int> mCs = new List<int>();
 			public NccpcDll.NccpcMemmgr2Mgr mMm;
 
 			public Sv()
@@ -40,11 +41,14 @@ namespace Nc1Ex1Server
 			public void qv(string s1) { System.Console.WriteLine(s1); }
 			public override void onNccpcNwLog(string s1) { qv(s1); }
 			//public override void onNccpcNwErr(string s1) { qv("Err " + s1); }
-			public override void onNccpcNwEnter(int cti, string peer) { qv("Dbg NwEnter ct:" + cti + " Peer:" + peer); }
+			public override void onNccpcNwEnter(int cti, string peer) { qv("Dbg NwEnter ct:" + cti + " Peer:" + peer); mCs.Add(cti); }
 			//public override NccpcMemmgr2Obj1 onNccpcNwEncode(int cti, int out desclen, NccpcMemmgr2Obj1 srcobj, int srclen, unsigned char cft) { return null; }
 			//public override NccpcMemmgr2Obj1 onNccpcNwDecode(int cti, int out desclen, NccpcNw1StreamWar1 srcsw, unsigned char cft) { return null; }
-			public override void onNccpcNwRecv(int cti, NccpcDll.NccpcNw1Pk2 ncpk) { qv("Dbg NwRecv Type:" + ncpk.getType() + " Len:" + ncpk.getDataLen()); }
-			public override void onNccpcNwLeave(int cti) { qv("Dbg NwLeave ct:" + cti); }
+			public override void onNccpcNwRecv(int cti, NccpcDll.NccpcNw1Pk2 ncpk) {
+				qv("Dbg NwRecv Type:" + ncpk.getType() + " Len:" + ncpk.getDataLen());
+				using (var pkw = ncpk.copyDeep()) { ncpk.send(mCs, pkw); }
+			}
+			public override void onNccpcNwLeave(int cti) { qv("Dbg NwLeave ct:" + cti + " remain:" + (mCs.Count-1)); mCs.Remove(cti); }
 
 		}
 

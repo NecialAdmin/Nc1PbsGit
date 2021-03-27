@@ -12,22 +12,25 @@ namespace Nc1Ex1Client
 		class Client : JcCtUnity1.JcCtUnity1
 		{
 			public Client() : base(Encoding.Default) { }
+			public void qv(string s1) { innLogOutput(s1); }
+			
+			//JcCtUnity1.JcCtUnity1
 			protected override void innLogOutput(string s1) { Console.WriteLine(s1); }
 			protected override void onConnect(JcCtUnity1.NwRst1 rst1, Exception ex = null)
 			{
-				Console.WriteLine("Dbg on connect: " + rst1);
+				qv("Dbg on connect: " + rst1);
 				int pkt = 1111;
 				using (JcCtUnity1.PkWriter1Nm pkw = new JcCtUnity1.PkWriter1Nm(pkt))
 				{
 					pkw.wInt32u((UInt32)2222);
 					this.send(pkw);
 				}
-				Console.WriteLine("Dbg send packet Type:" + pkt);
+				qv("Dbg send packet Type:" + pkt);
 			}
 			protected override void onDisconnect()
-			{ Console.WriteLine("Dbg on disconnect"); }
+			{ qv("Dbg on disconnect"); }
 			protected override bool onRecvTake(Jc1Dn2_0.PkReader1 pkrd)
-			{ Console.WriteLine("Dbg on recv: " + pkrd.getPkt()/* + pkrd.ReadString()*/ ); return true; }
+			{ qv("Dbg on recv: " + pkrd.getPkt()/* + pkrd.ReadString()*/ ); return true; }
 		}
 
 		static void Main(string[] args)
